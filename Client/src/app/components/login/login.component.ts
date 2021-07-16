@@ -7,9 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
+  credentials={
+    username: '',
+    password: ''
+  }
+
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  onSubmit(){
+    console.log("form Submitted");
+    if((this.credentials.username!='' && this.credentials.password!='') && (this.credentials.username!=null && this.credentials.password!=null)){
+      console.log("We have to submit the form to server");
+    } else {
+      console.log("Fields are empty!");
+    }
   }
 
 }
