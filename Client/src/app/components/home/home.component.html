@@ -1,7 +1,8 @@
 <div class="bootstrap-wrapper">
-    <div class="container text-center mt">
-        <h1 class="text-center">Welcome to Login Page</h1>
+    <div *ngIf="!isLoggedIn" class="container text-center mt">
+        <h1 class="text-center">Welcome to Angular Material and Spring Boot Project</h1>
 
-        <a routerLink="/login" mat-raised-button color="accent">Login Here!</a>
+        <a routerLink="/login" mat-raised-button color="accent">Login</a> 
+        <a routerLink="/registration" mat-raised-button color="primary" style="margin-left: 10px">Register</a>
     </div>
 </div>

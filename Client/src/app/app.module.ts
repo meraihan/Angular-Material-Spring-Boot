@@ -13,6 +13,9 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms'
+import {HttpClientModule } from '@angular/common/http';
+import { RegistrationComponent } from './components/registration/registration.component';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +23,8 @@ import {FormsModule} from '@angular/forms'
     NavBarComponent,
     HomeComponent,
     LoginComponent,
-    DashboardComponent
+    DashboardComponent,
+    RegistrationComponent
   ],
   imports: [
     BrowserModule,
@@ -30,9 +34,10 @@ import {FormsModule} from '@angular/forms'
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    FormsModule
+    FormsModule,
+    HttpClientModule,
   ],
-  providers: [],
+  providers: [HttpClientModule],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

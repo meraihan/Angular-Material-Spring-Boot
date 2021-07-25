@@ -2,10 +2,8 @@
     <div class="container mt">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-                <div class="container text-center">
-                    <img class="img-fluid" style="width: 100px" src="/assets/padlock.png" alt=""/>
-                </div>
-                <h1 class="text-center">Login Here !!</h1>
+            
+                <h1 class="text-center">Registration Here !!</h1>
                 <form (ngSubmit)="onSubmit()">
 
                     <mat-form-field class="full-width" appearance="outline">
@@ -18,13 +16,16 @@
                         <input [(ngModel)]="credentials.password" name="password" required type="password" matInput />
                     </mat-form-field>
 
+                    <mat-form-field class="full-width" appearance="outline">
+                        <mat-label>Email</mat-label>
+                        <input [(ngModel)]="credentials.email" name="email" required type="text" matInput />
+                    </mat-form-field>
+
                     <div class="container text-center">
-                        <button type="submit" mat-raised-button color="primary">Login</button>
+                        <button type="submit" mat-raised-button color="primary">Register</button>
                         <button type="reset" style="margin-left: 10px" mat-raised-button color="accent">Reset</button>
                     </div>
                 </form>
-
-               <!-- <p class="mt">  {{credentials | json }}</p> -->
             </div>
         </div>
     </div>
