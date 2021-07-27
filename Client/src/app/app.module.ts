@@ -16,6 +16,7 @@ import {FormsModule} from '@angular/forms'
 import {HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegSuccessComponent } from './components/reg-success/reg-success.component';
+import { VerificationFailedComponent } from './components/verification-failed/verification-failed.component';
 
 
 @NgModule({
@@ -26,7 +27,8 @@ import { RegSuccessComponent } from './components/reg-success/reg-success.compon
     LoginComponent,
     DashboardComponent,
     RegistrationComponent,
-    RegSuccessComponent
+    RegSuccessComponent,
+    VerificationFailedComponent
   ],
   imports: [
     BrowserModule,

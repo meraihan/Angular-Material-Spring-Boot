@@ -17,7 +17,11 @@
                         <mat-label>Password</mat-label>
                         <input [(ngModel)]="credentials.password" name="password" required type="password" matInput />
                     </mat-form-field>
-
+                    
+                    <div class="form-group">
+                        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+                         Login failed: {{ errorMessage }} </div>
+                    </div>
                     <div class="container text-center">
                         <button type="submit" mat-raised-button color="primary">Login</button>
                         <button type="reset" style="margin-left: 10px" mat-raised-button color="accent">Reset</button>
