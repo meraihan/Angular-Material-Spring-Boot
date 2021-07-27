@@ -17,6 +17,7 @@ import {HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { RegSuccessComponent } from './components/reg-success/reg-success.component';
 import { VerificationFailedComponent } from './components/verification-failed/verification-failed.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 
 @NgModule({
@@ -28,7 +29,8 @@ import { VerificationFailedComponent } from './components/verification-failed/ve
     DashboardComponent,
     RegistrationComponent,
     RegSuccessComponent,
-    VerificationFailedComponent
+    VerificationFailedComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
