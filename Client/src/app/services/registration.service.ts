@@ -17,10 +17,12 @@ export class RegistrationService {
   constructor(private http: HttpClient) { }
 
   register(user): Observable<any> {
+    const parsedUrl= new URL(window.location.href);
     return this.http.post(AUTH_API + 'signup', {
       username: user.username,
       email: user.email,
-      password: user.password
+      password: user.password,
+      baseFrontURL: parsedUrl.origin
     }, httpOptions);
   }
 }

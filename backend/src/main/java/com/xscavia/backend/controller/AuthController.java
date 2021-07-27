@@ -10,16 +10,24 @@ import com.xscavia.backend.repository.RoleRepository;
 import com.xscavia.backend.repository.UserRepository;
 import com.xscavia.backend.security.jwt.JwtUtils;
 import com.xscavia.backend.security.services.UserDetailsImpl;
+import com.xscavia.backend.service.AuthService;
+import net.bytebuddy.utility.RandomString;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 
+import javax.mail.MessagingException;
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.io.UnsupportedEncodingException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -44,6 +52,9 @@ public class AuthController {
     @Autowired
     JwtUtils jwtUtils;
 
+    @Autowired
+    AuthService authService;
+
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -58,6 +69,12 @@ public class AuthController {
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
 
+        if(userRepository.userIsEnable(loginRequest.getUsername())==0){
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Please Verified Your Account by Email "));
+        }
+
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),
@@ -66,7 +83,8 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest, HttpServletRequest request) throws UnsupportedEncodingException, MessagingException {
+        String siteURL = authService.getSiteURL(request);
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -80,9 +98,12 @@ public class AuthController {
         }
 
         // Create new user's account
-        User user = new User(signUpRequest.getUsername(),
-                signUpRequest.getEmail(),
-                encoder.encode(signUpRequest.getPassword()));
+        User user = new User();
+        user.setUsername(signUpRequest.getUsername());
+        user.setEmail(signUpRequest.getEmail());
+        user.setPassword(encoder.encode(signUpRequest.getPassword()));
+        user.setIsEnabled(signUpRequest.getIsEnabled());
+        user.setVerificationCode(RandomString.make(64));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -109,8 +130,24 @@ public class AuthController {
         }
 
         user.setRoles(roles);
+        authService.sendVerificationEmail(user, siteURL, signUpRequest.getBaseFrontURL());
         userRepository.save(user);
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+
+    @GetMapping("/verify")
+    public RedirectView verifyAccount(@Param("code") String code, @Param("baseUrl") String baseUrl){
+        boolean verified = authService.verify(code);
+        String pageTitle = "";
+        if(verified){
+            pageTitle = "Verification Succeeded";
+            return new RedirectView(baseUrl+"/signin");
+        }else{
+            pageTitle = "Verification Failed";
+            return new RedirectView(baseUrl+"/VerificationFailedComponent");
+        }
+    }
+
+
 }

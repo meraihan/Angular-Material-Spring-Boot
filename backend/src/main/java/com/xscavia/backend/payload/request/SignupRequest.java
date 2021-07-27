@@ -1,6 +1,7 @@
 package com.xscavia.backend.payload.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -24,6 +25,11 @@ public class SignupRequest {
     @NotBlank
     @Size(min = 6, max = 40)
     private String password;
+
+    private String baseFrontURL;
+
+    @Builder.Default
+    private Integer isEnabled =0;
 
     public String getUsername() {
         return username;
@@ -57,5 +63,19 @@ public class SignupRequest {
         this.role = role;
     }
 
+    public String getBaseFrontURL() {
+        return baseFrontURL;
+    }
 
+    public void setBaseFrontURL(String baseFrontURL) {
+        this.baseFrontURL = baseFrontURL;
+    }
+
+    public Integer getIsEnabled() {
+        return isEnabled;
+    }
+
+    public void setIsEnabled(Integer isEnabled) {
+        this.isEnabled = isEnabled;
+    }
 }

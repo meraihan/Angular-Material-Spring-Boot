@@ -15,6 +15,7 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms'
 import {HttpClientModule } from '@angular/common/http';
 import { RegistrationComponent } from './components/registration/registration.component';
+import { RegSuccessComponent } from './components/reg-success/reg-success.component';
 
 
 @NgModule({
@@ -24,7 +25,8 @@ import { RegistrationComponent } from './components/registration/registration.co
     HomeComponent,
     LoginComponent,
     DashboardComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    RegSuccessComponent
   ],
   imports: [
     BrowserModule,

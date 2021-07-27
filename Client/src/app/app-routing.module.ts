@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegSuccessComponent } from './components/reg-success/reg-success.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 
 
@@ -26,6 +27,11 @@ const routes: Routes = [
   {
     path: 'registration',
     component: RegistrationComponent,
+    pathMatch: 'full'
+  },
+  {
+    path: 'reg-success',
+    component: RegSuccessComponent,
     pathMatch: 'full'
   }
 ];
