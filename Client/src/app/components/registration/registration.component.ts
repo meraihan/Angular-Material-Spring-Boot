@@ -27,7 +27,6 @@ export class RegistrationComponent implements OnInit {
   }
 
   onSubmit(){
-    console.log("form Submitted");
     this.registerService.register(this.credentials).subscribe(
       data => {
         console.log(data);
