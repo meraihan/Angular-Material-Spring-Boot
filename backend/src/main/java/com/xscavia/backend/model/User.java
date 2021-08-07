@@ -13,14 +13,20 @@ import java.util.Set;
 
 @Data
 @Entity
-@Table(	name = "users",
-        uniqueConstraints = { @UniqueConstraint(columnNames = "email")})
+@Table(name = "users",
+        uniqueConstraints = {@UniqueConstraint(columnNames = "email")})
 @NoArgsConstructor
 @AllArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank
+    @Size(max = 100)
+    private String name;
+    @NotBlank
+    @Size(max = 100)
+    private String surname;
     @NotBlank
     @Size(max = 20)
     private String username;
@@ -34,14 +40,19 @@ public class User {
     private String verificationCode;
     private Integer isEnabled;
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(	name = "user_roles",
+    @JoinTable(name = "user_roles",
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    public User(@NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+    public User(@NotBlank @Size(max = 100) String name, @NotBlank @Size(max = 100) String surname,
+                @NotBlank @Size(max = 20) String username, @NotBlank @Size(max = 50) @Email String email, @NotBlank @Size(max = 120) String password) {
+        this.name = name;
+        this.surname = surname;
         this.username = username;
         this.email = email;
         this.password = password;
     }
+
+
 }

@@ -12,6 +12,14 @@ import java.util.Set;
 
 public class SignupRequest {
     @NotBlank
+    @Size(min = 3, max = 100)
+    private String name;
+
+    @NotBlank
+    @Size(min = 3, max = 100)
+    private String surname;
+
+    @NotBlank
     @Size(min = 3, max = 20)
     private String username;
 
@@ -49,6 +57,22 @@ public class SignupRequest {
 
     public String getPassword() {
         return password;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public void setPassword(String password) {

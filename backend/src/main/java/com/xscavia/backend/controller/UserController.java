@@ -2,7 +2,6 @@ package com.xscavia.backend.controller;
 
 import com.xscavia.backend.exception.ResourceNotFoundException;
 import com.xscavia.backend.model.User;
-import com.xscavia.backend.payload.request.UserRequest;
 import com.xscavia.backend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @CrossOrigin(origins = "http://localhost:4200")
-@RestController("*")
+@RestController
 @RequestMapping("/api/test")
 public class UserController {
 
@@ -59,14 +58,14 @@ public class UserController {
 
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long id,
-                                                               @Valid @RequestBody UserRequest user) throws ResourceNotFoundException {
+                                           @Valid @RequestBody User user) throws ResourceNotFoundException {
         User findUser = userRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + id));
 
         findUser.setId(user.getId());
         findUser.setUsername(user.getUsername());
         findUser.setEmail(user.getEmail());
-//        findUser.setRoles(user.getRoles());
+        findUser.setRoles(user.getRoles());
         final User updatedUser = userRepository.saveAndFlush(findUser);
         return ResponseEntity.ok(updatedUser);
     }
