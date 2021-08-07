@@ -18,7 +18,15 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { RegSuccessComponent } from './components/reg-success/reg-success.component';
 import { VerificationFailedComponent } from './components/verification-failed/verification-failed.component';
 import { ProfileComponent } from './components/profile/profile.component';
-
+import { MessageComponent } from './components/message/message.component';
+import {ToastrModule} from 'ngx-toastr';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatIconModule} from '@angular/material/icon';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {MatListModule} from '@angular/material/list';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @NgModule({
   declarations: [
@@ -30,7 +38,8 @@ import { ProfileComponent } from './components/profile/profile.component';
     RegistrationComponent,
     RegSuccessComponent,
     VerificationFailedComponent,
-    ProfileComponent
+    ProfileComponent,
+    MessageComponent
   ],
   imports: [
     BrowserModule,
@@ -42,6 +51,13 @@ import { ProfileComponent } from './components/profile/profile.component';
     MatInputModule,
     FormsModule,
     HttpClientModule,
+    MatMenuModule,
+    MatIconModule,
+    MatDividerModule,
+    ToastrModule.forRoot({
+      timeOut: 1000,
+      positionClass: 'toast-bottom-right'
+    })
   ],
   providers: [HttpClientModule],
   bootstrap: [AppComponent]

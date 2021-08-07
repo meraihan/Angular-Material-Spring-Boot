@@ -1,6 +1,95 @@
-<mat-toolbar color="primary">
-    <span><a mat-icon-button routerLink="/">Home</a></span>
-    <span class="example-spacer"></span>
-    <a mat-icon-button routerLink="/login" *ngIf="isLoggedIn">Login</a>
-
-</mat-toolbar>
+<mat-toolbar class="mat-elevation-z2" style="background-color:  #2F528F;color: white;  ">
+    <!--    <span><a mat-icon-button routerLink="/">Home</a></span>-->
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="toggleSideBar()">menu</mat-icon>
+      </button>
+      <span>Entrepreneurship Managment System<span></span></span>
+      <div fxFlex fxLayout="row" fxLayoutAlign="flex-end">
+        <ul fxLayout="row" fxLayoutGap="20px" style="list-style-type: none">
+  
+          <!--        <li>-->
+          <!--          <button mat-icon-button routerLink="/issue-logging">-->
+          <!--            <mat-icon>bug_report</mat-icon>-->
+          <!--          </button>-->
+          <!--        </li>-->
+          <!--        <li>-->
+          <!--          <button mat-icon-button routerLink="/user-guide">-->
+          <!--            <mat-icon>help_outline</mat-icon>-->
+          <!--          </button>-->
+          <!--        </li>-->
+          <!--        <li>-->
+          <!--          <button mat-icon-button >-->
+          <!--            <mat-icon>notifications</mat-icon>-->
+          <!--            <span></span>-->
+          <!--          </button>-->
+          <!--        </li>-->
+  
+          <!-- <li style="font-size: smaller;font-weight: normal;" fxLayoutGap="5px">
+              <small>
+                  <span style="display: block;height: 14px;">{{user.firstName}} {{user.surname}}</span>
+                  {{user.email}}
+              </small>
+          </li> -->
+  
+          <li>
+  
+  
+            <button mat-icon-button [matMenuTriggerFor]="menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button mat-menu-item>
+                <mat-icon>person_outline</mat-icon>
+                <span></span>
+              </button>
+              <!--            <button mat-menu-item routerLink="/user-guide">-->
+              <!--              <mat-icon>help_outline</mat-icon>-->
+              <!--              <span>User Guide</span>-->
+              <!--            </button>-->
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>exit_to_app</mat-icon>
+                Logout
+              </button>
+            </mat-menu>
+          </li>
+        </ul>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <mat-nav-list class="sideNavi" *ngIf="isShown">
+    <div id="left" class="initials"><p>tm</p></div>
+    <div id="right">
+      <p>{{name}} {{surname}}
+     {{email}}</p>
+    </div>
+    <mat-divider style="margin-top: 20px"></mat-divider>
+  
+    <h2 matSubheader>Menu</h2>
+    <a mat-list-item [routerLink]="'/dashboard'">
+      <mat-icon style="margin-right: 15px;">pie_chart_outline</mat-icon>
+      Dashboard</a>
+    <a mat-list-item [routerLink]="'/profile'">
+      <mat-icon style="margin-right: 15px;">person_outline</mat-icon>
+      Profile </a>
+    <a mat-list-item [routerLink]="'/contacts'">
+      <mat-icon style="margin-right: 15px;">business_center</mat-icon>
+      Business Profile </a>
+    <a mat-list-item [routerLink]="'/create-contact'">
+      <mat-icon style="margin-right: 15px;">move_to_inbox</mat-icon>
+      Leave Manager </a>
+    <a mat-list-item [routerLink]="'/activities'">
+      <mat-icon style="margin-right: 15px;">school</mat-icon>
+      Entrepreneurship Courses </a>
+  
+  <br/>
+    <mat-divider style="margin-top: 20px"></mat-divider>
+    <!--      <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a>-->
+  
+  </mat-nav-list>
+  
+  
+  
+  

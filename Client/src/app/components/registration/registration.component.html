@@ -1,11 +1,22 @@
+
 <div class="bootstrap-wrapper">
     <div class="container mt">
         <div class="row">
             <div class="col-md-6 offset-md-3">
-            
-                <h1 class="text-center">Registration Here !!</h1>
+              <div class="container text-center" style="margin-top: 100px">
+                <img class="img-fluid" style="" src="/assets/startup-logo.png" alt=""/>
+              </div>
+<!--                <h1 class="text-center">Registration Here !!</h1>-->
                 <form (ngSubmit)="onSubmit()">
 
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Name </mat-label>
+                    <input [(ngModel)]="credentials.name" name="name" required type="text" matInput />
+                  </mat-form-field>
+                  <mat-form-field class="full-width" appearance="outline">
+                    <mat-label>Surname</mat-label>
+                    <input [(ngModel)]="credentials.surname" name="surname" required type="text" matInput />
+                  </mat-form-field>
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>UserName</mat-label>
                         <input [(ngModel)]="credentials.username" name="username" required type="text" matInput />
@@ -18,12 +29,16 @@
 
                     <mat-form-field class="full-width" appearance="outline">
                         <mat-label>Email</mat-label>
-                        <input [(ngModel)]="credentials.email" name="email" required type="text" matInput />
+                        <input [(ngModel)]="credentials.email" name="email" required type="email" matInput />
                     </mat-form-field>
 
                     <div class="container text-center">
-                        <button type="submit" mat-raised-button color="primary">Register</button>
-                        <button type="reset" style="margin-left: 10px" mat-raised-button color="accent">Reset</button>
+                        <button type="submit" mat-raised-button style="background-color: #0B274F; color: white">Register</button>
+                      <a routerLink="/login" mat-raised-button  style="margin-left: 10px;background-color: #2F528F; color: white">Login</a>
+                      <div *ngIf="loading" style="margin-left:10px">
+                        <mat-spinner [diameter]="50"></mat-spinner>
+                      </div>
+<!--                        <button type="reset" style="margin-left: 10px;background-color: #2F528F;" mat-raised-button color="accent">Reset</button>-->
                     </div>
                 </form>
             </div>

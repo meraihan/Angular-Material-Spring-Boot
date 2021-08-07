@@ -1,33 +1,66 @@
 <div class="bootstrap-wrapper">
-    <div class="container mt">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="container text-center">
-                    <img class="img-fluid" style="width: 100px" src="/assets/padlock.png" alt=""/>
-                </div>
-                <h1 class="text-center">Login Here !!</h1>
-                <form (ngSubmit)="onSubmit()">
-
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>UserName</mat-label>
-                        <input [(ngModel)]="credentials.username" name="username" required type="text" matInput />
-                    </mat-form-field>
-
-                    <mat-form-field class="full-width" appearance="outline">
-                        <mat-label>Password</mat-label>
-                        <input [(ngModel)]="credentials.password" name="password" required type="password" matInput />
-                    </mat-form-field>
-                    
-                    <div class="form-group">
-                        <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
-                         Login failed: {{ errorMessage }} </div>
-                    </div>
-                    <div class="container text-center">
-                        <button type="submit" mat-raised-button color="primary">Login</button>
-                        <button type="reset" style="margin-left: 10px" mat-raised-button color="accent">Reset</button>
-                    </div>
-                </form>
-            </div>
+    <div class="container" style="background-color: #f0f0f0">
+      <div id="left">
+        <div class="flex-child magenta">
+          <div class="container text-center" style="margin-top: 200px">
+            <img class="img-fluid" style="" src="/assets/startup-logo.png" alt=""/>
+          </div>
         </div>
+      </div>
+  
+      <div id="right">
+  
+        <form (ngSubmit)="onSubmit()" style="margin-top: 200px">
+          <h1 style="padding-top: 15px;">Login </h1>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input [(ngModel)]="credentials.username" name="username" required type="text" matInput/>
+            <mat-icon matSuffix>person_outline</mat-icon>
+          </mat-form-field>
+          <br/>
+          <mat-form-field class="full-width" appearance="outline">
+            <mat-label>Password</mat-label>
+            <input [(ngModel)]="credentials.password" name="password" required type="password" matInput/>
+            <mat-icon matSuffix>remove_red_eye</mat-icon>
+          </mat-form-field>
+  
+          <div class="form-group">
+            <div class="alert alert-danger" role="alert" *ngIf="isLoginFailed">
+              Login failed: {{ errorMessage }} </div>
+          </div>
+          <div class="container text-center">
+            <button type="submit" mat-raised-button style="background-color: #0B274F; color: white">Login</button>
+  
+  
+            <a routerLink="/registration" mat-raised-button
+               style="margin-left: 10px;background-color: #2F528F; color: white">Register</a>
+  
+            <!--            <button type="reset" style="margin-left: 10px;background-color: #2F528F; color: white" mat-raised-button>Clear-->
+            <!--            </button>-->
+            <br/>
+            <br/>
+            <button mat-button>Forgot your password?</button>
+            <button mat-button>Reset here</button>
+            <div class="footer" style="margin-top: 30px">
+              &copy; The StartUp Lab {{year}}
+            </div>
+          </div>
+        </form>
+  
+  
+      </div>
+      <!--    <div class="row">-->
+  
+  
+      <!--      </div>-->
+  
+      <!--      <div class="col-md-6 offset-md-3">-->
+  
+      <!--&lt;!&ndash;        <h1 class="text-center">Login Here !!</h1>&ndash;&gt;-->
+  
+      <!--      </div>-->
+      <!--    </div>-->
+  
     </div>
-</div>
+  </div>
+  
